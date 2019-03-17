@@ -1,53 +1,76 @@
 # Invillia recruitment challenge
 
-[![Build Status](https://travis-ci.org/shelsonjava/invillia.svg?branch=master)](https://travis-ci.org/shelsonjava/invillia)
+Projeto desenvolvido como parte do processo seletivo
 
-![Invillia Logo](https://invillia.com/public/assets/img/logo-invillia.svg)
-[Invillia](https://https://www.invillia.com/) - A transformação começa aqui.
+* O Banco selecionado para esse projeto foi o H2.
+* A implementação para popular o banco e efetuar os testes se encontra na classe InvilliaApplication.
+* Como forma de segurança, eu implementaria a segurança baseada em Token(JWT). 
 
-The ACME company is migrating their monolithic system to a microservice architecture and you’re responsible to build their MVP (minimum viable product)  .
-https://en.wikipedia.org/wiki/Minimum_viable_product
 
-Your challenge is:
-Build an application with those features described below, if you think the requirements aren’t detailed enough please leave a comment (portuguese or english) and proceed as best as you can.
+URI para Store:
 
-You can choose as many features you think it’s necessary for the MVP,  IT’S NOT necessary build all the features, we strongly recommend to focus on quality over quantity, you’ll be evaluated by the quality of your solution.
+* localhost:8080/store (método GET)-> listagem das lojas cadastradas
+* localhost:8080/store/{id} (método GET)-> acessar o cadastro de alguma loja
+* localhost:8080/store/{id} (método PUT)-> efetuar alteração no cadastro da loja
 
-If you think something is really necessary but you don’t have enough time to implement please at least explain how you would implement it.
+URI para Order:
 
-## Tasks
+* localhost:8080/order (método GET)-> listagem dos pedidos cadastrados
+* localhost:8080/order (método POST)-> cadastro de um pedido
+* localhost:8080/order/{id} (método GET)-> acessar o cadastro de algum pedido
+* localhost:8080/order/confirmpayment/{id} (método PUT)-> confirma pagamento
+* localhost:8080/order/refunded/{id} (método GET)-> solicita devolução, a mesma só será permitida caso o status não esteja como confirmado e/ou tenha menos de 10 dias.
 
-Your task is to develop one (or more, feel free) RESTful service(s) to:
-* Create a **Store**
-* Update a **Store** information
-* Retrieve a **Store** by parameters
-* Create an **Order** with items
-* Create a **Payment** for an **Order**
-* Retrieve an **Order** by parameters
-* Refund **Order** or any **Order Item**
+# Modelo para inserção de dados
 
-Fork this repository and submit your code with partial commits.
+Store
 
-## Business Rules
+{
+    "name": "Alex",
+    "street": "Rua Vereador Moises Pereira",
+		"state": "Bahia",
+    "district": "Centro",
+    "country": "Brazil",
+    "city": "Paulo Afonso",
+    "number": "157"
+    
+}
 
-* A **Store** is composed by name and address
-* An **Order** is composed by address, confirmation date and status
-* An **Order Item** is composed by description, unit price and quantity.
-* A **Payment** is composed by status, credit card number and payment date
-* An **Order** just should be refunded until ten days after confirmation and the payment is concluded.
+Order
 
-## Non functional requirements
+{
+    "address": {
+        "street": "Rua Tiradentes",
+        "state": "Bahia",
+        "district": "BTN",
+        "country": "Brazil",
+        "city": "Paulo Afonso",
+        "number": "85"
+    },
+    "confirmationDate": "2019-03-15",
+    "status": "confirmed",
+    "payment": {
+        "paymentStatus": "confirmed",
+        "credcardNumber": 987654321,
+        "paymentDate": null
+    },
+    "items": 
+    [
+        {
+            "description": "trem",
+            "unitPrice": 7540.74,
+            "quantity": 2
+        },
+        {
+            "description": "Macbook",
+            "unitPrice": 2856.95,
+            "quantity": 5
+        },
+        {
+            "description": "Avião",
+            "unitPrice": 2333.0,
+            "quantity": 3
+        }
+    ],
+}
 
-Your service(s) must be resilient, fault tolerant, responsive. You should prepare it/them to be highly scalable as possible.
-
-The process should be closest possible to "real-time", balancing your choices in order to achieve the expected
-scalability.
-
-## Nice to have features (describe or implement):
-* Asynchronous processing
-* Database
-* Docker
-* AWS
-* Security
-* Swagger
-* Clean Code
