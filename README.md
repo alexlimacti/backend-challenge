@@ -5,6 +5,7 @@ Projeto desenvolvido como parte do processo seletivo
 * O Banco selecionado para esse projeto foi o H2.
 * A implementação para popular o banco e efetuar os testes se encontra na classe InvilliaApplication.
 * Como forma de segurança, eu implementaria a segurança baseada em Token(JWT).
+* Link para o repositório do projeto: https://github.com/alexlimacti/backend-challange.git
 
 
 URI para Store:
